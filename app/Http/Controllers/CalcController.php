@@ -22,14 +22,9 @@ class CalcController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Calc $calc)
+    public function create(Request $request)
     {
-        $calc->task_int = $request->input('intParam');
-        $calc->task_array = serialize($request->input('arParams'));
-        $calc->answer = $calc->getTaskAnswer($request);
-        $calc->user_id = 1;
-        $calc->save();
-        return($calc->answer);
+        
     }
 
     /**
@@ -42,8 +37,12 @@ class CalcController extends Controller
     {
         $calc->task_int = $request->input('intParam');
         $calc->task_array = serialize($request->input('arParams'));
+        $calc->answer = $calc->getTaskAnswer($request);
         $calc->user_id = 1;
         $calc->save();
+        $data = array('answer' => $calc->answer);
+        // return ($calc->answer);
+        return view('calc', $data);
     }
 
     /**

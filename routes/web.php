@@ -12,8 +12,8 @@
 */
 // Route::resource('calc', 'CalcController');
 
-// Route::get('/', function () {
-//     return view('calc');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::post('/calc/', 'CalcController@create')->name('calc');
+Route::post('/calc/', 'CalcController@store')->name('calc');
