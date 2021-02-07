@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::resource('calc', 'CalcController');
 
-Route::get('/', function () {
-    return view('calc');
-});
+// Route::get('/', function () {
+//     return view('calc');
+// });
 
-Route::get('/calc/{int}/{ar}', 'CalcController@create');
+Route::post('/calc/', 'CalcController@create')->name('calc');

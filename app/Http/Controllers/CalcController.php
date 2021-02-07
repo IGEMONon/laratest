@@ -22,9 +22,14 @@ class CalcController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($intParam, $arParams)
+    public function create(Request $request, Calc $calc)
     {
-        echo 'int: ' . $intParam . ', ar: ' . $arParams;
+        $calc->task_int = $request->input('intParam');
+        $calc->task_array = serialize($request->input('arParams'));
+        $calc->answer = $calc->getTaskAnswer($request);
+        $calc->user_id = 1;
+        $calc->save();
+        return($calc->answer);
     }
 
     /**
@@ -33,9 +38,12 @@ class CalcController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Calc $calc)
     {
-        //
+        $calc->task_int = $request->input('intParam');
+        $calc->task_array = serialize($request->input('arParams'));
+        $calc->user_id = 1;
+        $calc->save();
     }
 
     /**
@@ -80,6 +88,6 @@ class CalcController extends Controller
      */
     public function destroy(Calc $calc)
     {
-        //
+        $calc->delete();
     }
 }

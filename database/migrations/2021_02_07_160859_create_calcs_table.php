@@ -17,6 +17,7 @@ class CreateCalcsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('task_int');
             $table->longText('task_array');
+            $table->smallInteger('answer');
             $table->smallInteger('user_id');
             $table->timestamps();
         });
