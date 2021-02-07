@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('calc');
 });
+
+Route::get('/calc/{int}/{ar}', 'CalcController@create');
