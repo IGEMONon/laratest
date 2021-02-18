@@ -17,3 +17,5 @@ Route::get('/', function () {
 });
 
 Route::post('/calc/', 'CalcController@store')->name('calc');
+
+Route::post('/login/', 'UserController@login')->name('login');
