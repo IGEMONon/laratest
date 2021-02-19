@@ -22,4 +22,9 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'failed');
         }
     }
+
+    public function logout() {
+        Auth::logout();
+        return redirect("/");
+    }
 }

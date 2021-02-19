@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/calc/', 'CalcController@store')->name('calc');
+Route::post('/calc/', 'CalcController@store')->name('calc')->middleware('auth.basic');
 
 Route::post('/login/', 'UserController@login')->name('login');
+Route::post('/logout/', 'UserController@logout')->name('logout');
