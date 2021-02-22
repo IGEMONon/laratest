@@ -38,7 +38,7 @@ class CalcController extends Controller
         $calc->task_int = $request->input('intParam');
         $calc->task_array = serialize($request->input('arParams'));
         $calc->answer = $calc->getTaskAnswer($request);
-        $calc->user_id = 1;
+        $calc->user_id = auth()->user()->id;
         $calc->save();
         $data = array('answer' => $calc->answer);
         // return ($calc->answer);
