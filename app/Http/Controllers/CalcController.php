@@ -35,13 +35,26 @@ class CalcController extends Controller
      */
     public function store(Request $request, Calc $calc)
     {
-        $calc->task_int = $request->input('intParam');
-        $calc->task_array = serialize($request->input('arParams'));
-        $calc->answer = $calc->getTaskAnswer($request);
-        $calc->user_id = auth()->user()->id;
+        $arConsoleParams = $request->get('arInputParams');
+        if ($arConsoleParams === null) {
+            $intParam = $request->input('intParam');
+            $arParams = $request->input('arParams');
+            $intUserID = auth()->user()->id;
+        } else {
+            $intParam = $arConsoleParams['intParam'];
+            $arParams = $arConsoleParams['arParams'];
+            $intUserID = $arConsoleParams['intUserID'] ?? 0;
+        }
+        
+        $calc->task_int = $intParam;
+        $calc->task_array = serialize($arParams);
+        $calc->answer = $calc->getTaskAnswer($intParam, $arParams);
+        $calc->user_id = $intUserID;
         $calc->save();
         $data = array('answer' => $calc->answer);
-        // return ($calc->answer);
+        if (!empty($arConsoleParams)) {
+            return($data['answer']);
+        }
         return view('calc', $data);
     }
 

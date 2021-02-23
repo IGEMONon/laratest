@@ -40,7 +40,14 @@ class SendCalc extends Command
      */
     public function handle()
     {
-        dump($this->arguments());
-        dump($this->options());
+        $arConsoleParams['intParam'] = $this->argument('intParam');
+        $arConsoleParams['arParams'] = $this->argument('arParams');
+        $arConsoleParams['intUserID'] = $this->option('user') ?? null;
+        request()->merge([
+            'arInputParams' => $arConsoleParams
+        ]);
+        $controller = app()->make('App\Http\Controllers\CalcController');
+        $arCalcResult = app()->call([$controller, 'store']);
+        return($this->line($arCalcResult));
     }
 }

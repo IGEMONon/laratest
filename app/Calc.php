@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Calc extends Model
 {
-    public function getTaskAnswer($request)
+    public function getTaskAnswer($intParam, $arParams)
     {
-        $intParam = $request->input('intParam');
         $boolEqualFinded = false;
         $intAnswer = -1;
-        foreach ($request->input('arParams') as $intElemIndex => $intElemValue) {
+        foreach ($arParams as $intElemIndex => $intElemValue) {
             if ($boolEqualFinded == false && $intElemValue == $intParam) {
                 $intAnswer = $intElemIndex;
                 $boolEqualFinded = true;
