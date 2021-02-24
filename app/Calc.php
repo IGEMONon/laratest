@@ -9,6 +9,7 @@ class Calc extends Model
     public function getTaskAnswer($intParam, $arParams)
     {
         $boolEqualFinded = false;
+        $boolAnswerActual = false;
         $intAnswer = -1;
         foreach ($arParams as $intElemIndex => $intElemValue) {
             if ($boolEqualFinded == false && $intElemValue == $intParam) {
@@ -17,8 +18,11 @@ class Calc extends Model
             }
             if ($boolEqualFinded == true && $intElemValue != $intParam) {
                 $intAnswer++;
+                if ($boolAnswerActual == false) {
+                    $boolAnswerActual = true;
+                }
             }
         }
-        return($intAnswer);
+        return($boolAnswerActual ? $intAnswer : -1);
     }
 }
